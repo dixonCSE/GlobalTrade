@@ -1,0 +1,86 @@
+div {
+    font-size: 15px;
+    font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial,
+        Lucida Grande, sans-serif;
+}
+
+.side-nav-item {
+    color: #fff;
+    padding: 7px 10px;
+    display: flex;
+    cursor: pointer;
+    &:hover {
+        background-color: #0008;
+    }
+}
+
+a.side-nav-item {
+    text-decoration: none;
+}
+
+.side-nav-item.has-child {
+    display: flex;
+    justify-content: space-between;
+}
+
+.side-nav-item.level-1 {
+    padding-left: 15px;
+}
+
+.side-nav-item.level-2 {
+    padding-left: 35px;
+}
+
+.side-nav-item.level-3 {
+    padding-left: 50px;
+}
+
+.side-nav-item.level-4 {
+    padding-left: 60px;
+}
+
+.children {
+    &.expanded {
+        visibility: visible;
+        opacity: 1;
+        padding-left: 0;
+        max-height: 4000px;
+        transition: visibility 500ms, opacity 500ms, max-height 500ms;
+        transition-timing-function: ease-in-out;
+    }
+
+    &.collapsed {
+        overflow: hidden;
+        visibility: hidden;
+        padding-left: 0;
+        opacity: 0;
+        max-height: 1px;
+        transition: visibility 275ms, opacity 275ms, max-height 280ms;
+        transition-timing-function: ease-out;
+    }
+
+    .no-animations &.expanded,
+    .no-animations &.collapsed {
+        transition: none !important;
+    }
+}
+
+.level-1,
+.level-2,
+.level-3,
+.level-4 {
+    .mat-icon {
+        height: 20px;
+    }
+    &.collapsed > .mat-icon {
+        transform: rotate(0deg);
+        transition: transform 150ms;
+        transition-timing-function: ease-in-out;
+    }
+
+    &.expanded > .mat-icon {
+        transform: rotate(90deg);
+        transition: transform 150ms;
+        transition-timing-function: ease-in-out;
+    }
+}

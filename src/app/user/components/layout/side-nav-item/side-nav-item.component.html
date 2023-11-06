@@ -1,0 +1,58 @@
+<div *ngIf="navmenus.submenus; then thenBlock; else elseBlock"></div>
+
+<ng-template #thenBlock>
+    <div>
+        <div
+            class="side-nav-item has-child level-{{ level }}"
+            title="{{ navmenus.name }}"
+            [ngClass]="is_sideNavItemClassExpanded ? 'expanded' : 'collapsed'"
+            (click)="navItemExpand()"
+        >
+            <span>{{ navmenus.name | titlecase }}</span>
+            <mat-icon
+                role="img"
+                svgicon="keyboard_arrow_right"
+                class="mat-icon notranslate rotating-icon mat-icon-no-color"
+                aria-hidden="true"
+                data-mat-icon-type="svg"
+                data-mat-icon-name="keyboard_arrow_right"
+            >
+                <svg
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"
+                    ></path>
+                </svg>
+            </mat-icon>
+        </div>
+
+        <div
+            class="children"
+            [ngClass]="is_sideNavItemClassExpanded ? 'expanded' : 'collapsed'"
+        >
+            <ng-container *ngFor="let ItemLv0 of navmenus.submenus">
+                <app-side-nav-item
+                    [navmenus]="ItemLv0"
+                    [level]="level + 1"
+                ></app-side-nav-item>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #elseBlock>
+    <div>
+        <a
+            class="side-nav-item level-{{ level }}"
+            title="{{ navmenus.name }}"
+            [ngClass]="is_sideNavItemClassActive ? 'active' : ''"
+            [routerLink]="[navmenus.routerLink]"
+            routerLinkActive="active"
+        >
+            <span>{{ navmenus.name | titlecase }}</span>
+        </a>
+    </div>
+</ng-template>
