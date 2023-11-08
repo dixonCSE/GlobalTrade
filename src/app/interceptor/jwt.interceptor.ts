@@ -20,14 +20,15 @@ export class JwtInterceptor implements HttpInterceptor {
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
         let jwt = localStorage.getItem('jwt');
-        let jwtToken = req.clone({
+        let reqJwtToken = req.clone({
             setHeaders: {
                 Authorization: 'Bearer ' + jwt,
             },
         });
-        // return next.handle(jwtToken)
-        return next.handle(jwtToken).pipe(tap(
-            (event) => {
+        console.log('jwtInterceptor');
+        // return next.handle(reqJwtToken);
+        return next.handle(reqJwtToken).pipe(
+            tap((event) => {
                 //console.log(event);
                 if (event.type === HttpEventType.Response) {
                     if (event.body.redirect) {
@@ -37,7 +38,7 @@ export class JwtInterceptor implements HttpInterceptor {
                         }
                     }
                 }
-            }
-        ));
+            })
+        );
     }
 }

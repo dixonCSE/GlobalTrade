@@ -36,10 +36,7 @@ import { GlobalConstants as gData } from 'src/app/data/global-constants';
                     <div>
                         <img
                             class="w-36 h-36 rounded"
-                            src="{{
-                                assetsBase +
-                                    this._userState.state()?.image_thumb
-                            }}"
+                            src="{{ this._userState.state()?.image_thumb }}"
                             alt="Photo"
                         />
                     </div>

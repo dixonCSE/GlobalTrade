@@ -14,7 +14,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog.component';
 import { UserGuard } from '../guard/user.guard';
 
 import { UserState } from '../state/user.state';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ResInterceptor } from '../interceptor/res.interceptor';
 
 const routes: Routes = [
     {
@@ -262,6 +263,22 @@ const routes: Routes = [
 ];
 
 @NgModule({
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        LayoutModule,
+        MaterialModule,
+        RouterModule.forChild(routes),
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ResInterceptor,
+            multi: true,
+        },
+    ],
     declarations: [
         UserLayout,
         SideNavComponent,
@@ -269,14 +286,6 @@ const routes: Routes = [
         NotificationDialogComponent,
         AlertDialogComponent,
         ConfirmDialogComponent,
-    ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        FormsModule,
-        LayoutModule,
-        MaterialModule,
-        RouterModule.forChild(routes),
     ],
 })
 export class UserModule {
