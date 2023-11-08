@@ -14,6 +14,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog.component';
 import { UserGuard } from '../guard/user.guard';
 
 import { UserState } from '../state/user.state';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const routes: Routes = [
     {

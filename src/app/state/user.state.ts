@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { IUser } from '../interface/user.interface';
 import { UserService } from '../service/user.service';
+import { GlobalConstants as gData } from 'src/app/data/global-constants';
 
 @Injectable({
     providedIn: 'root',
@@ -49,8 +50,8 @@ export class UserState {
                 user_name: res.data.user_name,
                 email: res.data.email,
                 phone: res.data.phone,
-                image: res.data.image,
-                image_thumb: res.data.image_thumb,
+                image: gData.assetsBaseURL + res.data.image,
+                image_thumb: gData.assetsBaseURL + res.data.image,
                 country__name: res.data.country__name,
                 state: res.data.state,
                 city: res.data.city,

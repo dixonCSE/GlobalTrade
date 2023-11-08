@@ -182,7 +182,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {}
 
     onLogin() {
-        console.log(this.loginForm.value);
+        // console.log(this.loginForm.value);
 
         if (!this.loginForm.valid) return;
         this.isLoading = true;
@@ -190,7 +190,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         this._authService.userLogin(this.loginForm.value).subscribe(
             (res) => {
-                console.log(res);
+                //console.log(res);
 
                 if (res.type == 'success') {
                     localStorage.setItem('jwt', res.data.jwt);
