@@ -1,15 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-export interface DialogData {
-    title: string;
-    type: 'success' | 'warning' | 'error';
-    msg: string;
-    titleColor: string;
-}
+import { IDialogData } from '../interface/dialog-data.interface';
 
 @Component({
-    selector: 'alert-dialog',
+    selector: 'app-alert-dialog',
     styles: [
         '.title-center {text-align: center;}',
         '.justify-content-center {justify-content: center;}',
@@ -31,7 +25,7 @@ export interface DialogData {
     `,
 })
 export class AlertDialogComponent implements OnInit {
-    constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    constructor(@Inject(MAT_DIALOG_DATA) public data: IDialogData) {}
 
     ngOnInit(): void {}
 }

@@ -20,11 +20,18 @@ export class JwtInterceptor implements HttpInterceptor {
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
         let jwt = localStorage.getItem('jwt');
-        let reqJwtToken = req.clone({
-            setHeaders: {
-                Authorization: 'Bearer ' + jwt,
-            },
-        });
+        let reqJwtToken;
+
+        if (jwt == undefined || jwt == null || jwt == '') {
+            reqJwtToken = req.clone();
+        } else {
+            reqJwtToken = req.clone({
+                setHeaders: {
+                    Authorization: 'Bearer ' + jwt,
+                },
+            });
+        }
+
         console.log('jwtInterceptor');
         // return next.handle(reqJwtToken);
         return next.handle(reqJwtToken).pipe(
@@ -34,7 +41,8 @@ export class JwtInterceptor implements HttpInterceptor {
                     if (event.body.redirect) {
                         if (event.body.redirect == 'login') {
                             this._authService.userLogout();
-                            //this._router.navigate(['/' + event.body.redirect]);
+                        } else {
+                            this._router.navigate(['/' + event.body.redirect]);
                         }
                     }
                 }

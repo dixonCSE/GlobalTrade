@@ -11,7 +11,9 @@ import { AuthService } from '../service/auth.service';
 
 @Injectable()
 export class ResInterceptor implements HttpInterceptor {
-    constructor(private _authService: AuthService) {}
+    constructor(private _authService: AuthService) {
+        console.log('ResInterceptor');
+    }
     intercept(
         req: HttpRequest<any>,
         next: HttpHandler
@@ -29,7 +31,7 @@ export class ResInterceptor implements HttpInterceptor {
             }
         )); */
 
-        console.log('resInterceptor');
+        console.log('ResInterceptor');
         return next.handle(req);
     }
 }

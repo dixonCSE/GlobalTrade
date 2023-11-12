@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-    selector: 'confirm-dialog',
+    selector: 'app-confirm-dialog',
     styles: [
         '.title-center {text-align: center;}.justify-content-center {justify-content: center;}',
     ],

@@ -15,7 +15,7 @@ export class BalanceState {
         this.loadReq();
         setInterval(() => {
             this.loadReq();
-        }, 50000);
+        }, 60000);
     }
 
     loadReq() {

@@ -127,7 +127,6 @@ import { UserState } from 'src/app/state/user.state';
                     <mat-icon>menu</mat-icon>
                 </button>
 
-
                 <button
                     mat-mini-fab
                     class="header-menu-icon"
@@ -141,7 +140,7 @@ import { UserState } from 'src/app/state/user.state';
                 <img
                     mat-card-sm-image
                     class="header-user-image"
-                    src="https://placehold.jp/3d4070/ffffff/80x80.png"
+                    [src]="this._userState.state()?.image_thumb"
                     alt="P"
                     [matMenuTriggerFor]="menu"
                     aria-label="menu"

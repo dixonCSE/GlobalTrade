@@ -8,14 +8,10 @@ import { MaterialModule } from '../material.module';
 import { UserLayout } from './components/layout/user-layout.component';
 import { SideNavComponent } from './components/layout/side-nav/side-nav.component';
 import { SideNavItemComponent } from './components/layout/side-nav-item/side-nav-item.component';
-import { AlertDialogComponent } from './components/alert-dialog.component';
-import { NotificationDialogComponent } from './components/notification-dialog.component';
-import { ConfirmDialogComponent } from './components/confirm-dialog.component';
+
 import { UserGuard } from '../guard/user.guard';
 
 import { UserState } from '../state/user.state';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ResInterceptor } from '../interceptor/res.interceptor';
 
 const routes: Routes = [
     {
@@ -265,28 +261,14 @@ const routes: Routes = [
 @NgModule({
     imports: [
         CommonModule,
-        HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        LayoutModule,
         MaterialModule,
         RouterModule.forChild(routes),
+        LayoutModule,
     ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: ResInterceptor,
-            multi: true,
-        },
-    ],
-    declarations: [
-        UserLayout,
-        SideNavComponent,
-        SideNavItemComponent,
-        NotificationDialogComponent,
-        AlertDialogComponent,
-        ConfirmDialogComponent,
-    ],
+
+    declarations: [UserLayout, SideNavComponent, SideNavItemComponent],
 })
 export class UserModule {
     constructor(public _userState: UserState) {

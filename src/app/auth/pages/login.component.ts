@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { AuthService } from 'src/app/service/auth.service';
 import { MaterialModule } from '../../material.module';
-import { AlertDialogComponent } from '../../components/alert-dialog.component';
+import { AlertDialogComponent } from 'src/app/components/alert-dialog.component';
 
 @Component({
     selector: 'login-component',

@@ -14,8 +14,7 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { UserService } from 'src/app/service/user.service';
+import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { TradeService } from 'src/app/service/trade.service';
@@ -23,8 +22,8 @@ import { IPendingList } from 'src/app/interface/trade.interface';
 import {
     ConfirmDialogComponent,
     ConfirmDialogModel,
-} from '../components/confirm-dialog.component';
-import { AlertDialogComponent } from '../components/alert-dialog.component';
+} from 'src/app/components/confirm-dialog.component';
+import { AlertDialogComponent } from 'src/app/components/alert-dialog.component';
 
 declare const TradingView: any;
 
