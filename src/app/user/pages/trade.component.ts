@@ -281,7 +281,7 @@ export class TradeComponent implements OnInit, OnDestroy, AfterViewInit {
             if (this.ConfirmDialogState) {
                 this.isLoading = true;
                 this.isSubmitBtnEnable = false;
-                this._tradeService.insert(this.form.value).subscribe(
+                /* this._tradeService.insert(this.form.value).subscribe(
                     (res) => {
                         this.isLoading = false;
                         this.isSubmitBtnEnable = true;
@@ -314,7 +314,7 @@ export class TradeComponent implements OnInit, OnDestroy, AfterViewInit {
                         this.isSubmitBtnEnable = true;
                         console.log(err);
                     }
-                );
+                ); */
             }
         });
     }
@@ -353,6 +353,11 @@ export class TradeComponent implements OnInit, OnDestroy, AfterViewInit {
                                     titleColor: 'green',
                                 },
                             });
+                            this._tradeService
+                                .pendingList()
+                                .subscribe((result) => {
+                                    this.ListData = result.data;
+                                });
                         } else {
                             this.dialog.open(AlertDialogComponent, {
                                 disableClose: false,
@@ -410,6 +415,11 @@ export class TradeComponent implements OnInit, OnDestroy, AfterViewInit {
                                     titleColor: 'green',
                                 },
                             });
+                            this._tradeService
+                                .pendingList()
+                                .subscribe((result) => {
+                                    this.ListData = result.data;
+                                });
                         } else {
                             this.dialog.open(AlertDialogComponent, {
                                 disableClose: false,

@@ -26,7 +26,7 @@ import { AlertDialogComponent } from 'src/app/components/alert-dialog.component'
             useClass: JwtInterceptor,
             multi: true,
         },
-        { provide: DEFAULT_CURRENCY_CODE, useValue: '৳' },
+        { provide: DEFAULT_CURRENCY_CODE, useValue: 'JPY' },
     ],
     bootstrap: [AppComponent],
     imports: [
