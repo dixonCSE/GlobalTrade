@@ -18,7 +18,10 @@ import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { TradeService } from 'src/app/service/trade.service';
-import { IPendingList } from 'src/app/interface/trade.interface';
+import {
+    IPendingList,
+    ITradeDuration,
+} from 'src/app/interface/trade.interface';
 import {
     ConfirmDialogComponent,
     ConfirmDialogModel,
@@ -133,6 +136,48 @@ declare const TradingView: any;
                             </mat-form-field>
                         </div>
 
+                        <div class="flex justify-center">
+                            <mat-form-field
+                                appearance="outline"
+                                hideRequiredMarker
+                            >
+                                <mat-label> Slot </mat-label>
+
+                                <mat-select
+                                    #trade_duration_id
+                                    id="trade_duration_id"
+                                    formControlName="trade_duration_id"
+                                >
+                                    <mat-option
+                                        *ngFor="let element of tradeDuration"
+                                        [value]="element.id"
+                                    >
+                                        {{ element.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field
+                                appearance="outline"
+                                hideRequiredMarker
+                                floatLabel="always"
+                            >
+                                <mat-label> Profit percent </mat-label>
+                                <input
+                                    class="right-align"
+                                    matInput
+                                    #commission_percent
+                                    min="5"
+                                    type="number"
+                                    id="commission_percent"
+                                    formControlName="commission_percent"
+                                    placeholder="Profit percent"
+                                />
+                                <span matTextPrefix>%&nbsp;</span>
+                                <span matTextSuffix>.00</span>
+                            </mat-form-field>
+                        </div>
+
                         <div class="flex justify-between items-center">
                             <button
                                 type="button"
@@ -224,6 +269,7 @@ export class TradeComponent implements OnInit, OnDestroy, AfterViewInit {
     ConfirmDialogState: string = '';
 
     ListData: IPendingList[] = [];
+    tradeDuration: ITradeDuration[] = [];
 
     constructor(
         public _userState: UserState,
@@ -236,10 +282,16 @@ export class TradeComponent implements OnInit, OnDestroy, AfterViewInit {
         this.form = this.fb.group({
             amount: ['100', [Validators.required]],
             direction: ['1', [Validators.required]],
+            commission_percent: ['5', [Validators.required]],
+            trade_duration_id: ['', [Validators.required]],
         });
 
         this._tradeService.pendingList().subscribe((result) => {
             this.ListData = result.data;
+        });
+
+        this._tradeService.tradeDurationList().subscribe((result) => {
+            this.tradeDuration = result.data;
         });
     }
 

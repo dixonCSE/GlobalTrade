@@ -50,3 +50,13 @@ export interface ICompleteList {
 
     created_date: string | null;
 }
+
+export interface ITradeDuration {
+    id: number;
+    name: string;
+    duration: number;
+    interval: number;
+    stop_before: number;
+
+    created_date: string | null;
+}

@@ -13,6 +13,7 @@ export class TradeService {
         'user/trade/user_trade_pending_datatable';
     private _pendingListeUrl: string = 'user/trade/pending_list';
     private _completeListeUrl: string = 'user/trade/complete_list';
+    private _tradeDurationUrl: string = 'user/trade/trade_duration_list';
     private _completeDatatableUrl: string =
         'user/trade/user_trade_pending_datatable';
 
@@ -85,5 +86,9 @@ export class TradeService {
 
     pendingList(): Observable<any> {
         return this._commonService.get(this._pendingListeUrl);
+    }
+
+    tradeDurationList(): Observable<any> {
+        return this._commonService.get(this._tradeDurationUrl);
     }
 }
