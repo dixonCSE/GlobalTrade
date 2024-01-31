@@ -229,6 +229,12 @@ declare const TradingView: any;
                                     >
                                         {{ item.amount | currency }}
                                     </span>
+
+                                    <span
+                                        class="text-xs font-light px-3 py-1 my-1 rounded bg-blue-900 text-blue-300"
+                                    >
+                                        ± {{ item.commission | currency }}
+                                    </span>
                                 </div>
                             </div>
                             <div>

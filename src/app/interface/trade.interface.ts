@@ -16,6 +16,7 @@ export interface IPendingList {
 
     amount: number;
     direction: number;
+    commission: number;
 
     res_tstamp: string | null;
     created_date: string | null;
