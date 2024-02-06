@@ -53,9 +53,6 @@ declare const TradingView: any;
                 border-bottom: 1px solid rgba(125, 125, 125, 0.5);
             }
 
-            * {
-                color: #ffff;
-            }
             .Form {
                 min-width: 300px;
                 margin: 20px auto;

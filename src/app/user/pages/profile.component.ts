@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
+import { ThemePalette } from '@angular/material/core';
+
 import { UserState } from 'src/app/state/user.state';
 
 @Component({
@@ -55,7 +57,7 @@ import { UserState } from 'src/app/state/user.state';
                 </div>
 
                 <div>
-                    <mat-tab-group mat-align-tabs="start">
+                    <mat-tab-group mat-align-tabs="start" [color]="background">
                         <mat-tab label="Basic">
                             <table>
                                 <tr>
@@ -185,6 +187,7 @@ import { UserState } from 'src/app/state/user.state';
     `,
 })
 export class ProfileComponent implements OnInit {
+    background: ThemePalette = 'accent';
     constructor(public _userState: UserState) {}
     ngOnInit(): void {}
 }

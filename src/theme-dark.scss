@@ -21,13 +21,18 @@ $light-theme: mat.define-light-theme(
             accent: mat.define-palette(mat.$yellow-palette),
             warn: mat.define-palette(mat.$pink-palette),
         ),
+        typography: mat.define-typography-config(),
+        density: 0,
     )
 );
 
-@include mat.core-theme($dark-theme);
-@include mat.button-theme($dark-theme);
+/* @include mat.core-theme($dark-theme);
+@include mat.button-theme($dark-theme); */
+
+@include mat.all_component-themes($dark-theme);
 
 @media (prefers-color-scheme: light) {
-    @include mat.core-color($light-theme);
-    @include mat.button-color($light-theme);
+    //@include mat.core-color($light-theme);
+    //@include mat.button-color($light-theme);
+    @include mat.all_component-themes($light-theme);
 }
