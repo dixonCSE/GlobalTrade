@@ -3,6 +3,19 @@ import { CommonModule } from '@angular/common';
 import { UserState } from 'src/app/state/user.state';
 import { BalanceState } from 'src/app/state/balance.state';
 import { GlobalConstants as gData } from 'src/app/data/global-constants';
+import { SocketService } from 'src/app/service/socket.service';
+import {
+    EMPTY,
+    Observable,
+    catchError,
+    distinctUntilChanged,
+    map,
+    retry,
+    tap,
+    throwError,
+} from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 
 @Component({
     selector: 'home-component',
@@ -142,13 +155,46 @@ import { GlobalConstants as gData } from 'src/app/data/global-constants';
                 </div>
             </div>
         </section>
+
+        <p *ngIf="price$ | async as price; else loading">
+            Price: <strong>{{ price }}</strong
+            ><br />
+        </p>
+
+        <ng-template #loading>
+            <p>Loading price...</p>
+        </ng-template>
     `,
 })
 export class HomeComponent implements OnInit {
+    socket$: WebSocketSubject<any> = webSocket({
+        //url: 'wss://ws.finnhub.io?token=bsr37a748v6tucpfplbg',
+        url: 'ws://localhost:3000/socket.io/?',
+        openObserver: {
+            next: () => {
+                this.socket$.next({
+                    type: 'subscribe',
+                    symbol: 'BINANCE:BTCUSDT',
+                });
+            },
+        },
+    });
+    price$: Observable<any> | undefined;
+
     assetsBase = gData.assetsBaseURL;
     constructor(
         public _userState: UserState,
         public _balanceState: BalanceState
     ) {}
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.price$ = this.getLatestPrice();
+    }
+    getLatestPrice() {
+        return this.socket$.pipe(
+            map((t: number) => t.toFixed()),
+            distinctUntilChanged(),
+            tap((d) => console.log(d)),
+            catchError((_) => EMPTY)
+        );
+    }
 }
